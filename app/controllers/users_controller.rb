@@ -1,4 +1,6 @@
 class UsersController < ApplicationController 
+  before_action :load_reservations, :only => [:show]
+
   def new
     @user = User.new
   end
@@ -34,6 +36,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def load_reservations
+    @reservations = current_user.reservations
+
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

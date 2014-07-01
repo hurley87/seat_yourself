@@ -1,2 +1,8 @@
 <h1>Welcome to my World</h1>
-<h3><%= link_to "Create user", new_user_path %></h3>
+
+
+<% @restaurants.each do |rest| %>
+ <%= link_to restaurant_path(rest) do %>	
+ 	<h1>Restaurant Name: <%= rest.name  %></h1>	
+ <% end %>
+<% end %>
