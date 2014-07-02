@@ -4,14 +4,19 @@ class ReservationsController < ApplicationController
 
   def create
   	@reservation = @restaurant.reservations.build(reserve_params)
- 		if Reservation.all.find_by(date: reserve_params[:date], slot: reserve_params[:slot], restaurant_id: params[:restaurant_id])
- 			redirect_to restaurant_path(@restaurant)
- 		else
- 			@reservation.save
- 			redirect_to root_path
- 		end
-	end
+  	@reservation.user_id = current_user.id
 
+
+  		if @restaurant.reservations.find_by(date: @reservation.date, slot: @reservation.slot) && @reservation.save
+	 				redirect_to restaurant_path(@restaurant)
+	 		else
+	 			if @reservation.save
+	 				redirect_to user_path(current_user)
+	 			else
+	 				render "restaurants/show"
+	 			end
+	 		end
+	end
 
    private
 

@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pry'
 
 
+gem 'quiet_assets', :group => :development
 
 # Use unicorn as the app server
 # gem 'unicorn'

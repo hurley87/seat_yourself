@@ -1,6 +1,12 @@
 <h1><%= @restaurant.name  %></h1>
 <h2>Make a reservation:</h2>
 
+<% if @reservation && @reservation.errors.any?  %>	
+		<% @reservation.errors.full_messages.each do |msg|  %>
+			<p><%= msg %></p>
+		<% end %>
+<% end %>
+
 <%= form_for [@restaurant, @reservation] do |f| %>
 		<%= f.label :slot %>
 		<%= f.text_field :slot %>
